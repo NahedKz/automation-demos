@@ -1,29 +1,30 @@
- Automation Demos
+# Automation Demos
 
 This repository contains demo projects showcasing my skills in automation, bots, APIs, and backend logic.
 
-  Structure
+## 📂 Structure
+
 automation-demos/
 │
 ├── python-bots/
-│   └── telegram_demo_bot.py
+│ └── telegram_demo_bot.py
 │
 ├── n8n-workflows/
-│   └── sample_workflow.json
+│ └── sample_workflow.json
 │
 ├── apps-script/
-│   └── pdf_report_demo.gs
+│ └── pdf_report_demo.gs
 
 
-  What’s Inside
+## 🚀 What’s Inside
 
- 1) Python Bots  
+### 1) Python Bots  
 Simple automation bots using Python + APIs.
 
- 2) n8n Workflows  
+### 2) n8n Workflows  
 Example workflows demonstrating event pipelines, integrations, and automation logic.
 
- 3) Google Apps Script  
+### 3) Google Apps Script  
 PDF generation + internal automation tools used in real projects.
 
 ---
