@@ -1,0 +1,83 @@
+{
+  "name": "Demo - Telegram Lead to Google Sheets",
+  "active": false,
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Webhook - New Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram-demo-lead",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "2",
+      "name": "Set - Normalize Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [600, 300],
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "={{$json.body.name}}"
+            },
+            {
+              "name": "phone",
+              "value": "={{$json.body.phone}}"
+            },
+            {
+              "name": "source",
+              "value": "telegram_bot"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "3",
+      "name": "HTTP Request - Send to Sheet API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://example.com/google-sheets-webhook",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"name\": $json[\"name\"], \"phone\": $json[\"phone\"], \"source\": $json[\"source\"]}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook - New Lead": {
+      "main": [
+        [
+          {
+            "node": "Set - Normalize Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Normalize Data": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - Send to Sheet API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
